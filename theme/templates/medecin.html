@@ -1,0 +1,111 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block content %}
+
+        <div >
+            <a href="add_medecin">
+                <button class="w-[50px] h-[50px] rounded-full bg-blue-700 text-white p-[3px] text-center z-60 absolute bottom-5 ml-[36%] hover:cursor-pointer">
+                    <p class="text-[30px] ">+</p>
+                </button>
+            </a>    
+        </div>
+
+        <div class="mt-[187px] ">
+
+           <div class="h-[65px] w-90/100   fixed bg-blue-50">
+
+           </div>
+            <div class="w-screen">
+                <p class="ml-[35%] text-blue-800 z-50 fixed mt-[20px] font-bold">MEDECINS</p>
+
+
+                <div class="px-[50px] mt-[50px] pt-[10px] z-50 fixed w-51/100 ml-[14%]">
+                    <div class="flex justify-between border-1  rounded-tl-lg rounded-tr-lg ">
+                        <div class="w-3/4 bg-blue-500 text-white font-semibold rounded-tl-lg">
+                            <p class="text-center p-[10px] ">Code</p>
+                        </div>
+
+                        <div class="w-full bg-blue-500 text-white font-semibold border-l border-black border-r ">
+                            <p class="text-center p-[10px] ">Nom</p>
+                        </div>
+
+                        <div class="w-full bg-blue-500 text-white font-semibold border-r border-black">
+                            <p class="text-center p-[10px]">Specialite</p>
+                        </div>
+
+                        <div class="w-full">
+                            <p class="text-center bg-blue-500 text-white font-semibold rounded-tr-lg">Actions</p>
+                            <hr>
+                            <div class="flex justify-between">
+                                <p class="w-1/2 text-center border-r text-[15px] bg-orange-400">Modifier</p>
+                                <p class="w-1/2  text-center text-[15px] bg-red-500">Supprimer</p>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="pt-[110px] w-51/100 px-[50px] ml-[14%]">
+                    {% if medecins %} 
+                                <div class="">    
+                                    {% for medecin in medecins %}
+                                        <ul>
+                                                <li class="flex justify-between border border-t-0 bg-blue-100">
+                                                    {% comment %} {{ medecin }} {% endcomment %}
+
+                                                    {% comment %} <form action="{% url 'medecin' %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="pk" value="{{medecin.pk}}">
+                                                        <input type="text" name="code_medecin" value="{{medecin.code_medecin}}">
+                                                        <input type="text" name="nom_medecin" value="{{medecin.nom_medecin}}">
+                                                        <input type="text" name="specialite_medecin" value="{{medecin.specialite_medecin}}">
+                                                        {{form.specialite}}
+                                                        <button type="submit" name="UPDATE" value="true">Update</button>
+                                                    </form> {% endcomment %}
+                                                    <div class="w-3/4 py-[5px] text-center">
+                                                        {{ medecin.code_medecin }}
+                                                    </div>
+
+                                                    <div class="w-full  border-l border-r py-[5px] text-center">
+                                                        {{ medecin.nom_medecin }}
+                                                    </div>
+
+                                                    <div class="w-full py-[5px] text-center">
+                                                        {{ medecin.specialite_medecin.nom_specialite }}
+                                                    </div>
+
+                                                    <div class="w-full flex justify-between ">
+                                                        <div class=" py-[5px] ho py-[5px] text-centerver:cursor-pointer border-l w-1/2">
+                                                            <img src="{% static 'img/edit.svg' %}" class="justify-self-center " alt="">
+                                                        </div>
+
+                                                        <div class="w-1/2 py-[5px] text-center border-l">
+                                                            <div>
+                                                                <form method="POST" action="{% url 'medecin' %}">
+                                                                    {% csrf_token %}
+                                                                    <button type="submit" name="DELETE" value="true" class="w-full hover:cursor-pointer">
+                                                                        <img src="{% static 'img/delete.svg' %}" alt="delete" class="justify-self-center">
+                                                                    </button>
+                                                                    <input type="hidden" name="pk" value={{medecin.pk}}>
+                                                                </form>
+                                                            </div>    
+                                                        </div>
+                                                    </div>
+                                                </li>    
+                                        </ul>
+                                    {% endfor %}  
+                                </div> 
+                    {% else %}
+                        <div class="">
+                            <div class=" h-[100px] border-1 border-t-0  pt-[30px]">
+                                <p class="ml-[38%] text-blue-800">Aucun Medecin</p>
+                            </div>
+                        </div>                
+                    {% endif %}                
+                </div>
+
+            </div>
+        </div>    
+    {% endblock %}

@@ -1,0 +1,102 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+    {% block content %}
+
+    <div >
+        <a href="{% url 'add_patient' %}">
+            <button class="w-[50px] h-[50px] rounded-full bg-blue-700 text-white p-[3px] text-center z-60 absolute bottom-5 ml-[36%] hover:cursor-pointer">
+                <p class="text-[30px] ">+</p>
+            </button>
+        </a>    
+    </div>
+
+    <div class="mt-[187px] ">
+
+        <div class="h-[65px] w-90/100   fixed bg-blue-50">
+
+        </div>
+
+        <div class="w-screen">
+            <p class="ml-[35%] text-blue-800 z-50 fixed font-bold mt-[20px]">
+                PATIENTS
+            </p>
+
+            <div class="px-[50px] mt-[50px] pt-[10px] z-50 fixed w-51/100 ml-[14%]">
+                <div class="flex justify-between border-1  rounded-tl-lg rounded-tr-lg ">
+                    <div class="w-1/4 bg-blue-500 font-semibold text-white rounded-tl-lg">
+                        <p class="text-center p-[10px]">Numeros</p>
+                    </div>
+
+                    <div class="w-2/3 bg-blue-500 font-semibold text-white border-l border-r border-black ">
+                        <p class="text-center p-[10px]">Nom</p>
+                    </div>
+
+                    <div class="w-2/3">
+                        <p class="text-center bg-blue-500 font-semibold text-white rounded-tr-lg">Actions</p>
+                        <hr>
+                        <div class="flex justify-between">
+                            <p class="w-1/2 text-center border-r text-[15px] bg-orange-400">Modifier</p>
+                            <p class="w-1/2  text-center text-[15px] bg-red-500">Supprimer</p>
+                        </div>
+                    </div>
+                </div>    
+            </div>    
+
+
+
+                <div class="pt-[110px] px-[50px] ml-[14%] w-51/100">
+                    {% if patients %}
+                        <div class="">
+                            {% for patient in patients %}
+                                <ul>
+                                    <li class="flex justify-between border border-t-0  bg-blue-100">
+
+                                        <div class="w-1/4 border-r py-[5px] text-center">
+                                            {{ patient.num_patient }}
+                                        </div>
+
+                                        <div class="w-2/3 border-r py-[5px] text-center">
+                                            {{ patient.nom_patient }}
+                                        </div>
+
+                                        <div class="w-2/3 flex justify-between  ">
+                                            <div class=" py-[5px] text-centerver:cursor-pointer  border-r  w-1/2">
+                                                <img src="{% static 'img/edit.svg' %}" class="justify-self-center " alt="">
+
+                                                {% comment %} <form action="{% url 'patient' %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="pk" value="{{patient.pk}}">
+                                                    <input type="text" name="nom_patient" value="{{patient.nom_patient}}">
+                                                    <button type="submit" name="UPDATE" value="true">Update</button>
+                                                </form> {% endcomment %}
+                                            </div>
+
+                                            <div class="w-1/2 py-[5px] text-center">
+                                                <div>
+                                                    <form method="POST" action="{% url 'patient' %}">
+                                                        {% csrf_token %}
+                                                        <button type="submit" name="DELETE" value="true" class="w-full hover:cursor-pointer">
+                                                            <img src="{% static 'img/delete.svg' %}" alt="delete" class="justify-self-center">
+                                                        </button>
+                                                        <input type="hidden" name="pk" value={{patient.pk}}>
+                                                    </form>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>        
+                            {% endfor %}  
+                    {% else %}
+                        <div class="">
+                            <div class=" h-[100px] border-1 border-t-0  pt-[30px]">
+                                <p class="ml-[38%] text-blue-800">Aucun Patient</p>
+                            </div>
+                        </div>  
+                    {% endif %}
+                </div>
+        </div>      
+    </div>      
+        
+    {% endblock %}

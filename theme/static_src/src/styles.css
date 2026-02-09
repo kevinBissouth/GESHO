@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@source "../../../**/*.{html,py,js}";
+
+
+
+:root {
+  --bodyColor: hsl(216, 100%, 4%);
+  --primaryColor: hsl(209, 87%, 21%);
+  --primaryColorLight: hsl(209, 74%, 45%);
+  --whiteColor: #0a0a0a;
+  --textColor: #DDD;
+  --darkSectionColor: hsl(211, 100%, 12%);
+}
+
+.shadow {
+  box-shadow: 0 2px  2px 0 gray;
+}
+
+
+@layer base {
+  body {
+    @apply p-0 m-0 bg-blue-50 w-screen h-screen text-black overflow-x-hidden;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  input {
+    @apply border;
+  }
+}
+
+@layer components {
+  .title {
+    @apply text-3xl font-bold bg-gradient-to-r from-[var(--primaryColorLight)] to-[var(--textColor)] inline-block text-transparent bg-clip-text pb-2;
+  }
+
+  .titleMin {
+    @apply font-bold bg-gradient-to-r from-[var(--primaryColorLight)] to-[var(--textColor)] text-transparent bg-clip-text
+  }
+
+  .hov {
+    @apply w-full h-fit hover:border-l-6 hover:border-l-[var(--primaryColorLight)] hover:cursor-pointer hover:bg-white hover:rounded-r-xl hover:border pl-[5px];
+  }
+
+  .btn {
+    @apply rounded-2xl bg-gradient-to-r from-[var(--primaryColorLight)] to-[var(--textColor)] px-[10px] py-[5px] text-black;
+  }
+
+  .separa{
+    @apply p-[8px] rounded-xl hover:bg-blue-100;
+  }
+
+  .cadreHaut{
+    @apply w-[200px] h-[80px]  bg-blue-50 rounded-xl hover:bg-blue-100;
+  }
+
+  .consult_page_blur{
+    @apply blur-lg ;
+  }
+}

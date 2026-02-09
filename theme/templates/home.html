@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% comment %} 
+{% extends 'base.html' %}
+
+
+
+    {% block content %}
+        <div>
+            <div class="pl-[50px] pt-[50px]">
+                <div class="max-w-[500px]">
+                    <div class="font-bold mb-3 text-2xl">
+                        <h1>WELCOME TO CYBER ELECTION</h1>
+                    </div>
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt vitae 
+                            nihil ut laboriosam quam qui voluptate adipisci omnis quas quidem 
+                            voluptates quis totam praesentium id illo, et rem velit officiis.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt vitae 
+                            nihil ut laboriosam quam qui voluptate adipisci omnis quas quidem 
+                            voluptates quis totam praesentium id illo, et rem velit officiis.
+                        
+                        </p>
+                    </div>
+
+                    <div class="mt-[30px] text-white font-bold">
+                        <button class="p-[10px] rounded-2xl bg-gradient-to-r from-[var(--primaryColor)] to-[var(--primaryColorLight)] mb-[15px]">S'Inscrire en tant qu'Electeur</button>
+                        <br>
+                        <button class="p-[10px] rounded-2xl bg-gradient-to-r from-[var(--primaryColor)] to-[var(--primaryColorLight)] ">S'Inscrire en Tant que Candidat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %} {% endcomment %}
+
+
+
+
+
+
+
+    {% block content %}    
+
+            <a href="{% url 'add_consultation' %}">
+                <button id="add_consult" class="w-[50px] h-[50px] rounded-full bg-blue-700 text-white p-[3px] text-center z-60 absolute bottom-5 ml-[36%] hover:cursor-pointer">
+                    <p class="text-[30px] ">+</p>
+                </button>
+            </a>
+            
+        <div class="mt-[187px] ">
+                <div class="h-[65px] w-90/100   fixed bg-blue-50">
+                
+                </div>
+            
+                <div id="consult_page" class="w-screen">
+                    <p class="ml-[33%] text-blue-800 z-50 fixed mt-[20px] font-bold ">
+                        CONSULTATIONS
+                    </p>
+                
+
+                    <div class="w-screen">
+                    
+                        <div class="px-[50px] mt-[50px] pt-[10px] z-50 fixed w-85/100">
+                            <div class="flex justify-between border-1  rounded-tl-lg rounded-tr-lg ">
+                                <div class="w-7/50 bg-blue-500 font-semibold rounded-tl-lg">
+                                    <p class="text-center pt-[10px]  text-white">Code</p>
+                                </div>
+                            
+                                <div class="w-8/25  border-l border-r ">
+                                    <p class="text-center bg-blue-500 font-semibold text-white">Medecin</p>
+                                    <hr>
+                                    <div class="flex justify-between">
+                                        <p class="w-1/4 text-center bg-blue-50 bg-green-400">Code</p>
+                                        <p class="w-3/4 border-l text-center bg-blue-50 bg-green-400">Nom</p>
+                                    </div>
+                                </div>
+                            
+                                <div class="w-8/25 border-r">
+                                    <p class="text-center bg-blue-500 font-semibold text-white">patient</p>
+                                    <hr>
+                                    <div class="flex justify-between">
+                                        <p class="w-1/4 text-center bg-blue-50 bg-green-400">Numeros</p>
+                                        <p class="w-3/4 border-l text-center bg-blue-50 bg-green-400">Nom</p>
+                                    </div>
+                                </div>
+                            
+                                <div class="w-7/50 border-r bg-blue-500 font-semibold">
+                                    <p class="text-center pt-[10px] text-white">date</p>
+                                </div>
+                            
+                                <div class="w-8/50">
+                                    <p class="text-center bg-blue-500 font-semibold rounded-tr-lg text-white">Actions</p>
+                                    <hr>
+                                    <div class="flex justify-between">
+                                        <p class="w-1/2 text-center border-r text-[15px]  bg-orange-400">Modifier</p>
+                                        <p class="w-1/2  text-center text-[15px]  bg-red-500">Supprimer</p>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    
+                    
+                        <div class="pt-[111px] w-85/100 px-[50px]">
+                            {% if liste_consultations %}
+                                <div class="">
+                                    {% comment %} <div class="flex justify-between border-1"> {% endcomment %}
+                                        {% for element in liste_consultations %}
+                                            <ul>
+                                                <li class="flex justify-between border-1 border-t-0 bg-blue-100  ">
+                                                    <div class="w-7/50 py-[5px] pl-[2px] text-center">
+                                                        {{ element.id_consultation }}
+                                                    </div>
+                                                
+                                                    <div class="w-8/25 flex justify-between border-r border-l ">
+                                                        <div class="w-1/4 text-center py-[5px]">
+                                                            {{ element.consult_code_medecin.code_medecin }}
+                                                        </div>
+                                                    
+                                                        <div class="w-3/4 border-l py-[5px] text-center">
+                                                            {{ element.consult_code_medecin.nom_medecin }}
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div class="w-8/25 border-r flex justify-between">
+                                                        <div class="w-1/4 py-[5px] text-center">
+                                                            {{ element.consult_num_patient.num_patient }}
+                                                        </div>
+                                                    
+                                                        <div class="w-3/4 py-[5px] border-l text-center">
+                                                            {{ element.consult_num_patient.nom_patient }}
+                                                        </div>
+                                                    
+                                                    </div>
+                                                
+                                                    <div class="w-7/50 border-r py-[5px] text-center">
+                                                        {{ element.date|date:"j/m/Y H:i" }}
+                                                    </div>
+                                                
+                                                    <div class="w-8/50 flex justify-between">
+                                                        <div class="w-1/2 border-r text-center">
+                                                            <div class="justify-self-center py-[5px] hover:cursor-pointer">
+                                                                <img src="{% static 'img/edit.svg' %}" alt="">
+                                                            </div>
+                                                        
+                                                            <div>
+                                                                {% comment %} 
+                                                                <form action="{% url 'index' %}" method="POST">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="pk" value="{{element.pk}}">
+                                                                    <input type="text" name="consult_num_patient" value="{{element.consult_num_patient}}">
+                                                                    <input type="text" name="consult_code_medecin" value="{{element.consult_code_medecin}}">
+                                                                    <input type="text" name="motif" value="{{element.motif}}">
+                                                                    <input type="text" name="diagnostic" value="{{element.diagnostic}}">
+                                                                    <input type="text" name="prescription" value="{{element.prescription}}">
+                                                                    <input type="text" name="date" value="{{element.date}}">
+                                                                    <button type="submit" name="UPDATE" value="true">Update</button>
+                                                                </form> {% endcomment %}
+                                                            </div>
+                                                        </div>
+                                                    
+                                                    
+                                                        <div class="w-1/2 py-[5px] text-center">
+                                                            <div>
+                                                                <form method="POST" action="{% url 'index' %}">
+                                                                    {% csrf_token %}
+                                                                    <button type="submit" name="DELETE" value="true" class="w-full hover:cursor-pointer">
+                                                                        <img src="{% static 'img/delete.svg' %}" alt="delete" class="justify-self-center">
+                                                                    </button>
+                                                                    <input type="hidden" name="pk" value={{element.pk}}>
+                                                                </form>
+                                                            </div>    
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        
+                                        {% endfor %}  
+                                    </div> 
+                                </div>         
+                            {% else %}
+                            <div class="">
+                                <div class=" h-[100px] border-1 border-t-0  pt-[30px]">
+                                    <p class="ml-[36%] text-blue-800">Aucune Consultation</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>    
+
+                    </div>
+                
+                
+
+                </div>
+
+    {% endblock %}
+

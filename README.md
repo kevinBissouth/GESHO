@@ -1,2 +1,2 @@
-# GESHO
-Une application de gestion de consultations ( rendez-vous medecin patient ) dans un hopital
+# projetDeVotesDjango
+This is the django project for election

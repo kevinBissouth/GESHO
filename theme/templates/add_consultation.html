@@ -1,0 +1,185 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GESHO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script async src="{% static 'js/main.js' %}"></script>
+    {% tailwind_css %}
+</head>
+<body>
+
+    <div class="w-screen">
+        <div class="absolute bg-orange-600 z-60 justify-self-center mt-[20px] p-[15px] rounded-lg">
+            <form method="POST" class="space-y-[15px] ">
+                <div class="w-full hover:cursor-pointer">
+                    <a href="{% url 'index' %}">
+                        <div class="bg-red-600 justify-self-end w-[20px] h-[20px]">
+                            <img src="{% static 'img/close.svg' %}" alt="close.svg" class="font-bold">
+                        </div>
+                    </a>
+                </div>
+                {% csrf_token %}
+                <div class="w-[700px] space-y-2">
+                    <div class="flex justify-between ">
+                        <div >
+                            <p>Patient : </p>
+                            {{form.consult_num_patient}}
+                        </div>
+                        
+                        <div>
+                            <p>Medecin : </p>
+                            {{form.consult_code_medecin}}
+                        </div>    
+                    </div>
+                    <div>
+                        <p>Motif</p>
+                        {{form.motif}}
+                    </div>    
+                    <div class="flex justify-between gap-4">  
+
+                        <div>  
+                            <p>Diagnostic : </p>
+                            {{form.diagnostic}}
+                        </div>
+
+                        <div>
+                            <p>Prescription : </p>
+                            {{form.prescription}}
+                        </div>    
+                    </div>   
+                    
+                    <div>
+                        <p>Date : </p>
+                        {{form.date}}
+                    </div>    
+                </div>    
+                <button type="submit" class="w-full text-center p-[5px] border rounded-2xl bg-green-400">ajouter</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="blur-lg">
+        <div id="barCote" class="h-screen fixed w-[15%] px-[10px] bg-white">
+            <div class="flex justify-center space-x-2 items-center text-center pt-[15px] pb-[20px]">
+                <div>
+                    <img src="{% static 'img/calendar.svg' %}" alt="heart">
+                </div>
+            
+                <div>
+                    <h1 class="text-[25px] text-blue-800">gestho</h1>
+                </div>
+            </div>
+        
+            <ul class="">
+                <a href="{% url 'index' %}"> <li class="separa" >Consultation</li> </a>
+                <a href="{% url 'medecin' %}"> <li class="separa" >Medecin</li> </a>
+                <a href="{% url 'patient' %}"> <li class="separa" >Patient</li> </a>
+                <a href="{% url 'specialite' %}"> <li class="separa" >Specialite</li> </a>
+            </ul>
+        </div>
+
+        <div class="ml-[15%] w-screen ">
+        
+                <div id="cadreHaut" class="bg-indigo-700 pl-[1%] pt-[2%] pr-[16%] fixed w-[100%] ">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <form action="" method="get">
+                                <div class="flex relative">
+                                    <img class="mt-[8px] ml-[8px] z-50 " src="{% static 'img/search1.svg' %}" alt="search">
+                                
+                                    <div class="absolute ">
+                                        <input placeholder="search" class="placeholder:italic py-[5px] pl-[30px] rounded-2xl bg-blue-50" type="text">
+                                    </div>    
+                                </div>    
+                            </form>
+                        </div>
+                    
+                        <div class="flex w-[150px] gap-1 items-center ">
+                            <img class="w-[50px] h-[50px] rounded-full " src="{% static 'img/personne.svg' %}" alt="photo">
+                            <p class="text-white">John Marie</p>
+                        </div>
+                    </div>
+                
+                    <div class="flex justify-between px-[10%] py-[15px]">
+                        <div class="cadreHaut">
+                            <div class="text-center py-[2px] px-[3px] bg-blue-500 font-bold rounded-tl-xl rounded-tr-xl text-white">
+                                <p>CONSULTATIONS</p>
+                            </div>
+                            <hr>
+
+                            <div class="w-[200px]">
+                                <ul class="flex w-full justify-between">
+                                    <li class="pl-[5px]  w-1/2 text-center border-r bg-orange-400">Encours</li>
+
+                                    <li class="pr-[5px]  w-1/2 text-center bg-green-400">Reservees</li>
+                                </ul>
+                            </div>
+                            <hr>
+                        
+                            <div class="flex  justify-between">
+                                <p class="w-1/2 border-r text-center">1</p>
+                                <p class="w-1/2 text-center">{{ consultation_totale }}</p>
+                            </div>
+                        </div>
+                    
+                        <div class="cadreHaut">
+                            <div class="text-center py-[2px] px-[3px] bg-blue-500 font-bold rounded-tl-xl rounded-tr-xl text-white">
+                                <p>MEDECINS</p>
+                            </div>
+                            <hr>
+                        
+                            <div class="w-[200px]">
+                                <ul class="flex justify-between">
+                                    <li class="pl-[5px] border-r w-1/2 text-center bg-orange-400">Occupees</li>
+                                    <li class="pr-[5px]  w-1/2 text-center bg-green-400">Totals</li>
+                                </ul>
+                            </div>
+                            <hr>
+                        
+                            <div class="flex justify-between">
+                                <p class="w-1/2 text-center border-r">1</p>
+                                <p class="w-1/2 text-center">{{ medecin_total }}</p>
+                            </div>
+                        
+                        </div>
+                    
+                        <div class="cadreHaut">
+                            <div class="text-center py-[2px] px-[3px] bg-blue-500 font-bold rounded-tl-xl rounded-tr-xl text-white">
+                                <p>PATIENTS</p>
+                            </div>
+                            <hr>
+                        
+                            <div class="w-[200px]">
+                                <ul class="flex justify-between">
+                                    <li class="text-center border-r w-1/2 bg-orange-400">Occupees</li>
+                                    <li class="text-center w-1/2 bg-green-400">Totals</li>
+                                </ul>
+                            </div>
+                            <hr>
+                        
+                            <div class="flex justify-between">
+                                <p class="w-1/2 text-center border-r">1</p>
+                                <p class="w-1/2 text-center ">{{ patient_total }}</p>
+                            </div>
+                        
+                        </div>
+                    
+                        <div class="cadreHaut">
+                            <div class="text-center py-[2px] px-[3px] bg-blue-500 font-bold rounded-tl-xl rounded-tr-xl text-white">
+                                <p>SPECIALITES</p>
+                            </div>
+                            <hr>
+                        
+                            <div class="p-[10px] text-center ">
+                                <p > {{ specialite_totale }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>   
+</body>
+</html>
